@@ -11,18 +11,16 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
-    public function list()
-    {
-        $student = Students::all();
-        return view("list", ["students" => $student]);
-    }
-
-    public function newStudents()
+    public function index()
     {
         return view("form");
     }
+    public function show()
+    {
+        return view("notification");
+    }
 
-    public function saveStudent(Request $request)
+    public function save(Request $request)
     {
         $request->validate([
             "name" => "required",
@@ -40,7 +38,7 @@ class UserController extends Controller
         } catch (\Exception $exception) {
             return redirect()->back();
         }
-        return redirect()->to("list");
+        return redirect()->to("/notification");
     }
 
 

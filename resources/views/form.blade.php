@@ -1,95 +1,109 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>PRACTICAL DW</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <script type="text/javascript" src="https://code.jquery.com/jquery-latest.pack.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Feedback Form Using HTML, CSS And PHP - reusable form</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 </head>
+<body >
+<div class="container">
+    <div class="imagebg"></div>
+    <div class="row " style="margin-top: 50px">
+        <div class="col-md-6 col-md-offset-3 form-container">
+            <h2>Feedback Dynamic Websites</h2>
+            <p> Please provide your feedback below: </p>
+            <form role="form" action="{{url("/save")}}" method="post">
+                @method("POST")
+                @csrf
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+                        <label for="feedback">Your Name</label><br>
+                        <input class="form-control @error("name")is-invalid @enderror"type="text" name="name" placeholder="Enter Name">
+                        @error("name")
+                        <span class="error invalid-feedback">{{$message}}</span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+                        <label for="feedback">Email</label><br>
+                        <input class="form-control @error("email")is-invalid @enderror"type="text" name="email" placeholder="Enter Name">
+                        @error("email")
+                        <span class="error invalid-feedback">{{$message}}</span>
+                        @enderror
+                    </div>
+                </div>
 
-<body>
-<form role="form" action="{{url("save")}}" method="post" enctype="multipart/form-data" id=form-new">
-    @method("POST")
-    @csrf
-    <div class="card-body">
-        <div class="form-group">
-            <label>Student Name</label>
-            <input type="text" name="name" class="form-control @error("name")  is-invalid @enderror" placeholder="Student Name">
-            @error("name")
-            <span class="error invalid-feedback">  {{$message}}</span>
-            @enderror
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+                        <label for="feedback">Telephone</label><br>
+                        <input class="form-control @error("telephone")is-invalid @enderror"type="text" name="telephone" placeholder="Enter Name">
+                        @error("telephone")
+                        <span class="error invalid-feedback">{{$message}}</span>
+                        @enderror
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 form-group">
+                        <label for="feedback">Feedback</label><br>
+                        <textarea class="form-control @error("feedback")is-invalid @enderror"type="text" name="feedback" placeholder="Enter Name">
+                        </textarea>
+                        @error("feedback")
+                        <span class="error invalid-feedback">{{$message}}</span>
+                        @enderror
+                    </div>
+
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+            <div id="success_message" style="width:100%; height:100%; display:none; "> <h3>Posted your feedback successfully!</h3> </div>
+            <div id="error_message" style="width:100%; height:100%; display:none; "> <h3>Error</h3> Sorry there was an error sending your form. </div>
         </div>
-        <div class="form-group">
-            <label>Student Email</label>
-            <input type="email" name="email" class="form-control @error("email")  is-invalid @enderror" placeholder="Student Email">
-            @error("email")
-            <span class="error invalid-feedback">  {{$message}}</span>
-            @enderror
-        </div>
-        <div class="form-group">
-            <label>Student Email</label>
-            <input type="text" name="telephone" class="form-control @error("telephone")  is-invalid @enderror" placeholder="Student Telephone">
-            @error("telephone")
-            <span class="error invalid-feedback">  {{$message}}</span>
-            @enderror
-        </div>
-        <div class="form-group">
-            <label>Feedback</label>
-            <textarea name="feedback" class="form-control @error("feedback") is-invalid @enderror" placeholder="Feedback"></textarea>
-            @error("feedback")
-            <span class="error invalid-feedback">{{$message}}</span>
-            @enderror
-        </div>
+
     </div>
-    <!-- /.card-body -->
-    <div class="card-footer">
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
-</form>
+
+</div>
+</div>
 </body>
-<script type="text/javascript">
-    $(document).ready(function()
+<style>
+    body {
+        background-color: #000;
+    }
+    html,
+    body {
+        height: 100%;
+    }
+    .imagebg {
+        background-image: url("images/mixing-desk-351478_1920.jpg");
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        background-attachment: fixed;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        -webkit-filter: blur(3px);
+        filter: blur(3px);
+        opacity: 0.6;
+        filter: alpha(opacity=60);
+    }
+    .form-container
     {
-        var submit = $("button[type='submit']");
-        // bắt sự kiện click vào nút Login
-        submit.click(function()
-        {
-            var name = $("input[name='name']").val();
-            var email = $("input[name='email']").val();
-            var telephone = $("input[name='telephone']").val();
-            var feedback = $("textarea[name='feedback']").val();
-            if (name == '') {
-                alert('Vui lòng nhập tên');
-                return false;
-            }
-            if (email == '') {
-                alert('Vui lòng nhập email');
-                return false;
-            }
-            if (telephone == '') {
-                alert('Vui lòng nhập số điện thoại');
-                return false;
-            }
-            var data = $('form#form-new').serialize();
-            $.ajax({
-                type : 'POST',
-                url  : '/list',
-                data : data,
-                success :  function(data)
-                {
-                    if(data == 'false')
-                    {
-                        alert('chua dien thu thong tin');
-                    }else{
-                        $('#content').html(data);
-                    }
-                }
-            });
-            return false;
-        });
-    });
-</script>
-</html>
+        background-color: #fff;
+        box-shadow: 0 16px 24px 2px rgba(0,0,0,0.14), 0 20px 30px 5px rgba(0,0,0,0.12), 0 8px 10px -5px rgba(0,0,0,0.3);
+        border-radius: 8px;
+        font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    }
+</style>
