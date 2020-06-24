@@ -11,12 +11,26 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
-    public function form()
+    public function index()
     {
-        $student = Students::all();
-        return view("form",[
-            "students" => $student
-        ]);
+        return view("form");
+    }
+
+    public function show()
+    {
+        return view("notification");
+    }
+
+    public function save(Request $request)
+    {
+        $news = new news;
+        $news->name = $request->name;
+        $news->email = $request->email;
+        $news->telephone = $request->telephone;
+        $news->feedback = $request->feedback;
+        $news->save();
+        return redirect()->action('StudentController@show');
+
     }
 }
 

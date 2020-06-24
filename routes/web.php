@@ -17,6 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/form','UserController@form');
+Route::get('/', "UserController@index");
+Route::get('/thongbao', "UserController@show");
+Route::post('/save', 'UserController@save');
 
 
