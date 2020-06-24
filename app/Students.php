@@ -10,8 +10,8 @@ class Students extends Model
     // khóa chính là id thì không cần phải viết lại
     // lọc các trường còn lại của bảng
     public $fillable = [
-        "students_name",
-        "students_email",
+        "name",
+        "email",
         "telephone",
         "feedback",
     ];

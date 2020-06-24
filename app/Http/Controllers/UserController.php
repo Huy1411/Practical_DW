@@ -11,26 +11,38 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
-    public function index()
+    public function list()
+    {
+        $student = Students::all();
+        return view("list", ["students" => $student]);
+    }
+
+    public function newStudents()
     {
         return view("form");
     }
 
-    public function show()
+    public function saveStudent(Request $request)
     {
-        return view("notification");
+        $request->validate([
+            "name" => "required",
+            "email" => "required|min:6",
+            "telephone" => "required|min:6",
+            "feedback" => "required|min:6|max:100",
+        ]);
+        try {
+            Students::create([
+                "name" => $request->get("name"),
+                "email" => $request->get("email"),
+                "telephone" => $request->get("telephone"),
+                "feedback" => $request->get("feedback"),
+            ]);
+        } catch (\Exception $exception) {
+            return redirect()->back();
+        }
+        return redirect()->to("list");
     }
 
-    public function save(Request $request)
-    {
-        $news = new news;
-        $news->name = $request->name;
-        $news->email = $request->email;
-        $news->telephone = $request->telephone;
-        $news->feedback = $request->feedback;
-        $news->save();
-        return redirect()->action('StudentController@show');
 
-    }
 }
 
